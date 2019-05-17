@@ -39,7 +39,16 @@ public class CustomerController {
   
   return model;
  }
- 
+ @RequestMapping(value="/updateCustomer/{id}", method=RequestMethod.GET)
+ public ModelAndView editCustomer(@PathVariable long id) {
+  ModelAndView model = new ModelAndView();
+  
+  Customer customer = customerService.getCustomerById(id);
+  model.addObject("customerForm", customer);
+  model.setViewName("customer_form");
+  
+  return model;
+ }
  @RequestMapping(value="/saveCustomer", method=RequestMethod.POST)
  public ModelAndView save(@ModelAttribute("customerForm") Customer customer) {
 	 customerService.saveOrUpdate(customer);
